@@ -1,0 +1,44 @@
+<h1>Listing produtos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Image url</th>
+      <th>Price</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @produtos.each do |produto| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even')%>">
+      <td>
+        <%= image_tag(produto.image_url, class: 'list_image')%>
+      </td>
+      <td class="list_description">
+      <dl>
+        <dt><%= produto.title %></dt>
+        <dd><%= truncate(strip_tags(produto.description), length: 80 )%></dd>
+        
+        </dl>
+        </td>
+
+
+        <td class="list_actions">
+
+        <%= link_to 'Show', produto %><br/>
+        <%= link_to 'Edit', edit_produto_path(produto) %><br/>
+        <%= link_to 'Destroy', produto, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Produto', new_produto_path %>
